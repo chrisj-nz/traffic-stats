@@ -27,6 +27,7 @@ jobs:
         run: |
           git fetch
           git restore --source origin/csv -- traffic_2022.csv
+          mv traffic_2022.csv existing_traffic_2022.csv
       - name: Setup node
         uses: actions/setup-node@v3
         with:
@@ -42,6 +43,7 @@ jobs:
           git checkout csv
           git config user.name github-actions
           git config user.email "<>"
+          rm existing_traffic_2022.csv
           mv new_traffic_2022.csv traffic_2022.csv
           git add traffic_2022.csv
           git commit -m "generated"

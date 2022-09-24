@@ -8,7 +8,7 @@ async function run() {
   const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
   const { data: {views} } = await octokit.rest.repos.getViews({owner:'chrisj-nz', repo:'traffic-stats'});
 
-  const csvFilePath = `traffic_${new Date().getFullYear()}.csv`;
+  const csvFilePath = `existing_traffic_${new Date().getFullYear()}.csv`;
   const csvFileData = fs.existsSync(csvFilePath) ? fs.readFileSync(csvFilePath, 'utf8') : '';
   const records = parse(csvFileData, { columns: true, objname: 'timestamp' });
   
