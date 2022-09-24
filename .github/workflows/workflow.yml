@@ -26,7 +26,7 @@ jobs:
       - name: Checkout csv
         run: |
           git fetch
-          git restore --source csv -- traffic_2022.csv
+          git restore --source origin/csv -- traffic_2022.csv
       - name: Setup node
         uses: actions/setup-node@v3
         with:
