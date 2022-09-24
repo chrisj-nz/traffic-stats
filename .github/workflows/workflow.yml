@@ -44,8 +44,8 @@ jobs:
         run: node traffic-stats.js
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
-          CSV_FILEPATH: ../csv/traffic-stats.csv
-          REPOSITORY_OWNER: 'chrisj-nz',
+          CSV_FILEPATH: ../csv/${{ env.csvFileName }}
+          REPOSITORY_OWNER: 'chrisj-nz'
           REPOSITORY_NAME: 'traffic-stats'
       - name: Commit CSV
         working-directory: csv
