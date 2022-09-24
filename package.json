@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node traffic-stats.js"
   },
   "repository": {
     "type": "git",
