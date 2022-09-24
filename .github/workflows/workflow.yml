@@ -24,7 +24,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Checkout csv
-        run: git checkout csv -- traffic_2022.csv
+        run: |
+          git fetch
+          git restore --source csv -- traffic_2022.csv
       - name: Setup node
         uses: actions/setup-node@v3
         with:
@@ -37,6 +39,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT }}
       - name: Commit csv
         run: |
+          echo ${{ github.ref_name }}
           git config user.name github-actions
           git config user.email "<>"
           git add traffic_2022.csv
