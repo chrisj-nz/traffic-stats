@@ -3,12 +3,15 @@ const core = require('@actions/core');
 const fs = require('fs');
 const {parse} = require('csv-parse/sync');
 const {stringify} = require('csv-stringify/sync');
+
 const csvFilePath = process.env.CSV_FILEPATH;
 const gitHubToken = process.env.GITHUB_TOKEN;
+const repository_owner = process.env.REPOSITORY_OWNER;
+const repository_name = process.env.REPOSITORY_NAME;
 
-async function run() {
+async function run({gitHubToken, csvFilePath, repository_owner, repository_name}) {
   const octokit = github.getOctokit(gitHubToken);
-  const { data: {views} } = await octokit.rest.repos.getViews({owner:'chrisj-nz', repo:'traffic-stats'});
+  const { data: {views} } = await octokit.rest.repos.getViews({owner: repository_owner, repo: repository_name});
 
   const csvFileData = fs.existsSync(csvFilePath) ? fs.readFileSync(csvFilePath, 'utf8') : '';
   const records = parse(csvFileData, { columns: true, objname: 'timestamp' });
@@ -27,4 +30,4 @@ async function run() {
   fs.writeFileSync(csvFilePath, updatedCsvFileData);
 }
 
-run();
+run({gitHubToken, csvFilePath, repository_owner, repository_name});
