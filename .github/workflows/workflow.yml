@@ -33,5 +33,5 @@ jobs:
       - name: Create CSV
         run: npm start
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
       
