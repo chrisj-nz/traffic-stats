@@ -45,4 +45,5 @@ jobs:
           mv new_traffic_2022.csv traffic_2022.csv
           git add traffic_2022.csv
           git commit -m "generated"
+          git push
       
