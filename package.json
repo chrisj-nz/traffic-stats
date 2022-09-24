@@ -1,0 +1,25 @@
+{
+  "name": "traffic-stats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node traffic-stats.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisj-nz/traffic-stats.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrisj-nz/traffic-stats/issues"
+  },
+  "homepage": "https://github.com/chrisj-nz/traffic-stats#readme",
+  "dependencies": {
+    "csv-parse": "^5.3.0",
+    "csv-stringify": "^6.2.0",
+    "fs": "^0.0.1-security"
+  }
+}
