@@ -21,30 +21,35 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout csv branch
+        uses: actions/checkout@v3
+        with:
+          ref: csv
+          path: csv
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Checkout csv
-        run: |
-          git fetch
-          git restore --source origin/csv -- traffic_2022.csv
-          mv traffic_2022.csv existing_traffic_2022.csv
+        with:
+          path: main
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: 16
       - name: Install Dependencies
-        run: npm install
+        run: |
+          cd main
+          npm install
       - name: Create CSV
-        run: npm start
+        run: |
+          cd main
+          npm start
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
+          CSV_FILEPATH: ../csv/traffic_2022.csv
       - name: Commit csv
         run: |
-          git checkout csv
+          cd csv
           git config user.name github-actions
           git config user.email "<>"
-          rm existing_traffic_2022.csv
-          mv new_traffic_2022.csv traffic_2022.csv
           git add traffic_2022.csv
           git commit -m "generated"
           git push
