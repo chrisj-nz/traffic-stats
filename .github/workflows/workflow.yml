@@ -39,10 +39,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT }}
       - name: Commit csv
         run: |
-          echo ${{ github.ref_name }}
+          git checkout csv
           git config user.name github-actions
           git config user.email "<>"
+          mv new_traffic_2022.csv traffic_2022.csv
           git add traffic_2022.csv
           git commit -m "generated"
-          git push origin ${{ github.ref_name }}:csv
       

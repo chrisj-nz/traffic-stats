@@ -26,7 +26,8 @@ async function run() {
 
   core.info(`csv: ${updatedCsvFileData}`);
 
-  fs.writeFileSync(csvFilePath, updatedCsvFileData);
+  const updatedCsvFilePath = `new_traffic_${new Date().getFullYear()}.csv`;
+  fs.writeFileSync(csvFilePath, updatedCsvFilePath);
 }
 
 run();
