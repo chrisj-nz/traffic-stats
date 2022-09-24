@@ -50,7 +50,11 @@ jobs:
           cd csv
           git config user.name github-actions
           git config user.email "<>"
+          echo "adding"
           git add traffic_2022.csv
+          echo "committing.."
           git commit -m "generated"
+          echo "pushing"
           git push
+          echo "done"
       
