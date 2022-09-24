@@ -44,12 +44,13 @@ jobs:
         run: node traffic-stats.js
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
-          CSV_FILEPATH: ../csv/$csvFileName
+          CSV_FILEPATH: ../csv/${{ env.csvFileName }}
       - name: Commit CSV
         working-directory: csv
         run: |
           git config user.name github-actions
           git config user.email "<>"
+          echo $csvFileName
           git add $csvFileName
           git diff-index --quiet HEAD || git commit -m "generated"
           git push

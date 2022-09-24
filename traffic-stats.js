@@ -6,6 +6,8 @@ const {stringify} = require('csv-stringify/sync');
 const csvFilePath = process.env.CSV_FILEPATH;
 const gitHubToken = process.env.GITHUB_TOKEN;
 
+core.info(`csvFilePath: ${csvFilePath}`);
+
 async function run() {
   const octokit = github.getOctokit(gitHubToken);
   const { data: {views} } = await octokit.rest.repos.getViews({owner:'chrisj-nz', repo:'traffic-stats'});
