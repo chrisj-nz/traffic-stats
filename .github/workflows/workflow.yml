@@ -45,8 +45,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
           CSV_FILEPATH: ../csv/${{ env.csvFileName }}
-          REPOSITORY_OWNER: ${{ github.repository_owner }}
-          REPOSITORY_NAME: ${${{ github.repository }}%%/*}
+          REPOSITORY: ${{ github.repository }}
       - name: Commit CSV
         working-directory: csv
         run: |

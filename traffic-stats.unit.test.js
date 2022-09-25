@@ -22,13 +22,14 @@ it('creates a new csv file sorted by timestamp', async () => {
 
     const repository_owner = 'repository_owner';
     const repository_name = 'repository_name';
+    const repository = `${repository_owner}/${repository_name}`;
     const repos = {
         getViews: async ({owner, repo}) => {
             return (owner === repository_owner && repo === repository_name) ? {data: { views}} : undefined;
         }
     };
 
-    await createCsv({fs, repos, csvFilePath, repository_owner, repository_name});
+    await createCsv({fs, repos, csvFilePath, repository});
     
     expect(fs.contents).toBe(expectedCsv);
   });
@@ -60,13 +61,14 @@ it('creates a new csv file sorted by timestamp', async () => {
 
     const repository_owner = 'repository_owner';
     const repository_name = 'repository_name';
+    const repository = `${repository_owner}/${repository_name}`;
     const repos = {
         getViews: async ({owner, repo}) => {
             return (owner === repository_owner && repo === repository_name) ? {data: { views}} : undefined;
         }
     };
 
-    await createCsv({fs, repos, csvFilePath, repository_owner, repository_name});
+    await createCsv({fs, repos, csvFilePath, repository});
     
     expect(fs.contents).toBe(expectedCsv);
   });
