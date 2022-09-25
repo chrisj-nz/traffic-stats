@@ -45,7 +45,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
           CSV_FILEPATH: ../csv/${{ env.csvFileName }}
-          REPOSITORY_OWNER: 'chrisj-nz'
+          REPOSITORY_OWNER: ${{ github.repository_owner }}
           REPOSITORY_NAME: 'traffic-stats'
       - name: Commit CSV
         working-directory: csv
