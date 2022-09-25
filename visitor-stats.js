@@ -1,10 +1,10 @@
 import github from '@actions/github';
 import fs from 'fs';
-import { updateCsvWithLatestViews } from './visitor-stats-service.js';
+import { updateCsvWithLatestViews } from './csv-aggregator.js';
 
 const csvFilePath = process.env.CSV_FILEPATH;
 const gitHubToken = process.env.GITHUB_TOKEN;
 const repository = process.env.REPOSITORY;
-const repos = github.getOctokit(gitHubToken).rest.repos;
+const getViews = github.getOctokit(gitHubToken).rest.repos.getViews;
 
-updateCsvWithLatestViews({fs, repos, csvFilePath, repository});
+updateCsvWithLatestViews({fs, getViews, csvFilePath, repository});
