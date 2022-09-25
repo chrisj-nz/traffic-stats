@@ -31,9 +31,9 @@ jobs:
         working-directory: main
         run: node visitor-stats.js
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
           CSV_FILEPATH: ../csv/${{ env.csvFileName }}
-          REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
       - name: Commit CSV
         working-directory: csv
         run: |
