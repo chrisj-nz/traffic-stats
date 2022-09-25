@@ -11,23 +11,22 @@ it('creates a new csv file sorted by timestamp', async () => {
         } 
     };
 
-    const views = [
-        {timestamp: '2022-09-24T00:00:00Z', count: 149, uniques: 1},
-        {timestamp: '2022-09-23T00:00:00Z', count: 12, uniques: 2},
-    ];
-
-    const expectedCsv = 'timestamp,count,uniques\n'
-        + '2022-09-23T00:00:00Z,12,2\n'
-        + '2022-09-24T00:00:00Z,149,1\n';
-
     const repository_owner = 'repository_owner';
     const repository_name = 'repository_name';
     const repository = `${repository_owner}/${repository_name}`;
     const repos = {
         getViews: async ({owner, repo}) => {
-            return (owner === repository_owner && repo === repository_name) ? {data: { views}} : undefined;
+            const views = [
+                {timestamp: '2022-09-24T00:00:00Z', count: 149, uniques: 1},
+                {timestamp: '2022-09-23T00:00:00Z', count: 12, uniques: 2},
+            ];
+            return (owner === repository_owner && repo === repository_name) ? {data: { views }} : undefined;
         }
     };
+    
+    const expectedCsv = 'timestamp,count,uniques\n'
+        + '2022-09-23T00:00:00Z,12,2\n'
+        + '2022-09-24T00:00:00Z,149,1\n';
 
     await createCsv({fs, repos, csvFilePath, repository});
     
@@ -47,26 +46,25 @@ it('creates a new csv file sorted by timestamp', async () => {
         } 
     };
 
-    const views = [
-        {timestamp: '2022-09-24T00:00:00Z', count: 150, uniques: 2},
-        {timestamp: '2022-09-26T00:00:00Z', count: 26, uniques: 3},
-        {timestamp: '2022-09-25T00:00:00Z', count: 25, uniques: 4},
-    ];
+    const repository_owner = 'repository_owner';
+    const repository_name = 'repository_name';
+    const repository = `${repository_owner}/${repository_name}`;
+    const repos = {
+        getViews: async ({owner, repo}) => {
+            const views = [
+                {timestamp: '2022-09-24T00:00:00Z', count: 150, uniques: 2},
+                {timestamp: '2022-09-26T00:00:00Z', count: 26, uniques: 3},
+                {timestamp: '2022-09-25T00:00:00Z', count: 25, uniques: 4},
+            ];
+            return (owner === repository_owner && repo === repository_name) ? {data: { views }} : undefined;
+        }
+    };
 
     const expectedCsv = 'timestamp,count,uniques\n'
         + '2022-09-23T00:00:00Z,12,1\n'
         + '2022-09-24T00:00:00Z,150,2\n'
         + '2022-09-25T00:00:00Z,25,4\n'
         + '2022-09-26T00:00:00Z,26,3\n';
-
-    const repository_owner = 'repository_owner';
-    const repository_name = 'repository_name';
-    const repository = `${repository_owner}/${repository_name}`;
-    const repos = {
-        getViews: async ({owner, repo}) => {
-            return (owner === repository_owner && repo === repository_name) ? {data: { views}} : undefined;
-        }
-    };
 
     await createCsv({fs, repos, csvFilePath, repository});
     
