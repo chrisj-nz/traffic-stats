@@ -1,4 +1,4 @@
-import { createCsv } from './traffic-stats-service.js';
+import { updateCsvWithLatestViews } from './visitor-stats-service.js';
 
 it('creates a new csv file sorted by timestamp', async () => {
     const csvFilePath = 'csvFilePath';
@@ -28,7 +28,7 @@ it('creates a new csv file sorted by timestamp', async () => {
         + '2022-09-23T00:00:00Z,12,2\n'
         + '2022-09-24T00:00:00Z,149,1\n';
 
-    await createCsv({fs, repos, csvFilePath, repository});
+    await updateCsvWithLatestViews({fs, repos, csvFilePath, repository});
     
     expect(fs.contents).toBe(expectedCsv);
   });
@@ -66,7 +66,7 @@ it('creates a new csv file sorted by timestamp', async () => {
         + '2022-09-25T00:00:00Z,25,4\n'
         + '2022-09-26T00:00:00Z,26,3\n';
 
-    await createCsv({fs, repos, csvFilePath, repository});
+    await updateCsvWithLatestViews({fs, repos, csvFilePath, repository});
     
     expect(fs.contents).toBe(expectedCsv);
   });

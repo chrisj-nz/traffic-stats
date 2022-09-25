@@ -1,12 +1,12 @@
 {
-  "name": "traffic-stats",
+  "name": "visitor-stats",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
-    "start:dev": "nodenv --env .env traffic-stats.js"
+    "start:dev": "nodenv --env .env visitor-stats.js"
   },
   "repository": {
     "type": "git",

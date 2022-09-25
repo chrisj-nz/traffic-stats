@@ -2,10 +2,10 @@ import core from '@actions/core';
 import {parse} from 'csv-parse/sync';
 import {stringify} from 'csv-stringify/sync';
 
-export async function createCsv({fs, repos, csvFilePath, repository}) {
+export async function updateCsvWithLatestViews({fs, repos, csvFilePath, repository}) {
     const [repository_owner, repository_name] = repository.split('/');
 
-    core.info(`Getting latest traffic views from ${repository_owner}/${repository_name}`);
+    core.info(`Getting latest visitor views from ${repository_owner}/${repository_name}`);
     const { data: {views} } = await repos.getViews({owner: repository_owner, repo: repository_name});
   
     core.info(`Reading ${csvFilePath}`);

@@ -1,4 +1,4 @@
-name: traffic-stats
+name: visitor-stats
 
 on:
   #schedule:
@@ -9,7 +9,7 @@ jobs:
   update-csv:
     runs-on: ubuntu-latest
     env:
-      csvFileName: traffic.csv
+      csvFileName: visitors.csv
     steps:
       - name: Checkout csv branch
         uses: actions/checkout@v3
@@ -29,7 +29,7 @@ jobs:
         run: npm install
       - name: Create CSV
         working-directory: main
-        run: node traffic-stats.js
+        run: node visitor-stats.js
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
           CSV_FILEPATH: ../csv/${{ env.csvFileName }}
