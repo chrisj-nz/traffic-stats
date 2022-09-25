@@ -1,0 +1,45 @@
+name: traffic-stats
+
+on:
+  #schedule:
+    #- cron: "0 23 * * *" # Run this once per day, towards the end of the day 
+  workflow_dispatch:
+
+jobs:
+  update-csv:
+    runs-on: ubuntu-latest
+    env:
+      csvFileName: traffic.csv
+    steps:
+      - name: Checkout csv branch
+        uses: actions/checkout@v3
+        with:
+          ref: csv
+          path: csv
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          path: main
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install Dependencies
+        working-directory: main
+        run: npm install
+      - name: Create CSV
+        working-directory: main
+        run: node traffic-stats.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+          CSV_FILEPATH: ../csv/${{ env.csvFileName }}
+          REPOSITORY: ${{ github.repository }}
+      - name: Commit CSV
+        working-directory: csv
+        run: |
+          git config user.name github-actions
+          git config user.email "<>"
+          git add $csvFileName
+          git diff-index --quiet HEAD || git commit -m "generated"
+          git push
+      
